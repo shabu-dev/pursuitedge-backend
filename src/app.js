@@ -6,7 +6,7 @@ const cors = require("cors");
 const loginRoutes = require("./routes/login/loginRoutes");
 
 //Schedule Routes
-const scheduleRoutes = require("./routes/schedule/scheduleRoutes");
+const scheduleRoutes = require("./routes/Schedule/scheduleRoutes");
 
 
 
