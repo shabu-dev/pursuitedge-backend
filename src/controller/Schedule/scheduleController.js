@@ -48,9 +48,22 @@ const deleteSchedule = async (req, res) => {
     }
 };
 
+
+const getScheduleSingleData = async (req, res) => {
+    try {
+        const { course, country } = req.body;
+        //return res.status(400).json({course, country });
+        const schedule = await scheduleRepository.getScheduleSingleData(course, country);
+        res.status(200).json({ message: "Schedule fetched successfully", schedule });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     createSchedule,
     getSchedule,
     updateSchedule,
-    deleteSchedule
+    deleteSchedule,
+    getScheduleSingleData
 };  

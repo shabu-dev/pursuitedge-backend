@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const db = require('../../models');
 
 const Schedule = db.Schedule;
@@ -16,7 +17,7 @@ const createSchedule = async (course,trainer_name,batch_start,batch_end,batch_ty
 
 const getSchedule = async ({country, batch_type, time_slot,month,course_type}) => {
     try {
-        const where = {};
+        const where = {status: 'active', batch_start  : { [Op.gte]: new Date() } };
         if (country) {
             where.country = country;
         }
@@ -70,10 +71,50 @@ const deleteSchedule = async (id) => {
     }
 };  
 
+const getScheduleSingleData = async (course,country) => {
+    try {
+        console.log("Fetching single schedule for course:", course, "and country:", country);
+        const where = {
+            status: 'active',
+            batch_start: { [Op.gte]: new Date() },
+            course: course,
+            course_type: {
+                [Op.in]: [
+                    'Online',
+                    'Premium Mentorship',
+                    'Corporate',
+                ],
+            },
+        };
+        if (country) {
+            where.country = country;
+        }
+        const schedules = await Schedule.findAll({ where, order: [['batch_start', 'ASC']]  });
+        const prices = { Online: null, 'Premium Mentorship': null, Corporate: null,};
+        for (const schedule of schedules) {
+            if (prices[schedule.course_type] === null) {
+                prices[schedule.course_type] = {
+                offer_price: schedule.offer_price,
+                original_price: schedule.original_price,
+                currency_symbol:
+                    schedule.country === 'USA' ? '$' : '₹',
+                batch_start: schedule.batch_start,
+                seats_left: schedule.seats_left,
+                };
+            }
+        }
+        return prices;
+        
+    } catch (error) {
+        console.error("Error fetching single schedule:", error);
+        throw error;
+    }
+};
 
 module.exports = {
     createSchedule,
     getSchedule,
     updateSchedule,
-    deleteSchedule
+    deleteSchedule,
+    getScheduleSingleData
 };
