@@ -24,5 +24,6 @@ sequelize.sync()
 
     db.Login = require('./Login/loginModel')(sequelize, Sequelize);
     db.Schedule = require('./Schedule/scheduleModel')(sequelize, Sequelize);
+    db.Course = require('./Course/courseModel')(sequelize, Sequelize);
 
     module.exports = db;
