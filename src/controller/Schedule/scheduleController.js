@@ -17,8 +17,8 @@ const createSchedule = async (req, res) => {
 
 const getSchedule = async (req, res) => {
     try {
-        const {country, batch_type, time_slot,month,course_type} = req.query;
-        const schedules = await scheduleRepository.getSchedule({country, batch_type, time_slot,month,course_type});
+        const {country, batch_type, time_slot,month,course_type,course} = req.query;
+        const schedules = await scheduleRepository.getSchedule({country, batch_type, time_slot,month,course_type,course});
         res.status(200).json({ message: "Schedules fetched successfully", schedules });
     } catch (error) {
         res.status(500).json({ message: error.message });

@@ -15,7 +15,7 @@ const createSchedule = async (course,trainer_name,batch_start,batch_end,batch_ty
 
 };
 
-const getSchedule = async ({country, batch_type, time_slot,month,course_type}) => {
+const getSchedule = async ({country, batch_type, time_slot,month,course_type,course}) => {
     try {
         const where = {status: 'active', batch_start  : { [Op.gte]: new Date() } };
         if (country) {
@@ -23,6 +23,10 @@ const getSchedule = async ({country, batch_type, time_slot,month,course_type}) =
         }
         if (batch_type) {
             where.batch_type = batch_type;
+        }
+        if(course)
+        {
+            where.course = course;
         }
         if (time_slot) {
             where.time_slot = time_slot;
