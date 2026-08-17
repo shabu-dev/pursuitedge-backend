@@ -10,6 +10,7 @@ const scheduleRoutes = require("./routes/Schedule/scheduleRoutes");
 
 //Course Routes
 const courseRoutes = require("./routes/course/courseRoutes");
+const categoryRoutes = require("./routes/course/categoryRoutes");
 
 
 
@@ -23,5 +24,6 @@ app.use("/api/login", loginRoutes);
 app.use("/api/schedule", scheduleRoutes);
 
 app.use("/api/course", courseRoutes);
+app.use("/api/category", categoryRoutes);
 
 module.exports = app;
