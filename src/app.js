@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
+
 
 //Login Routes 
 const loginRoutes = require("./routes/login/loginRoutes");
@@ -11,13 +13,15 @@ const scheduleRoutes = require("./routes/Schedule/scheduleRoutes");
 //Course Routes
 const courseRoutes = require("./routes/course/courseRoutes");
 const categoryRoutes = require("./routes/course/categoryRoutes");
-
+const instructorRoutes = require('./routes/Course/instructorRoutes');
 
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/api/login", loginRoutes);
 
@@ -25,5 +29,8 @@ app.use("/api/schedule", scheduleRoutes);
 
 app.use("/api/course", courseRoutes);
 app.use("/api/category", categoryRoutes);
+
+
+app.use('/api/instructor', instructorRoutes);
 
 module.exports = app;
