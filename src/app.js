@@ -14,6 +14,7 @@ const scheduleRoutes = require("./routes/Schedule/scheduleRoutes");
 const courseRoutes = require("./routes/course/courseRoutes");
 const categoryRoutes = require("./routes/course/categoryRoutes");
 const instructorRoutes = require('./routes/Course/instructorRoutes');
+const testimonialRoutes = require('./routes/course/testimonialRoutes');
 
 
 const app = express();
@@ -32,5 +33,7 @@ app.use("/api/category", categoryRoutes);
 
 
 app.use('/api/instructor', instructorRoutes);
+app.use('/api/testimonial', testimonialRoutes);
+
 
 module.exports = app;

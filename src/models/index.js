@@ -30,7 +30,7 @@ sequelize.sync()
     db.CourseContent = require('./Course/courseContentModel')(sequelize,Sequelize);
     db.Category = require('./Course/categoryModel')(sequelize, Sequelize);
     db.Instructor = require('./Course/instructorModel')(sequelize, Sequelize);
-
+    db.Testimonial = require('./Course/testimonialModel')(sequelize,Sequelize);
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});
