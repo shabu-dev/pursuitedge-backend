@@ -19,6 +19,9 @@ const testimonialRoutes = require('./routes/course/testimonialRoutes');
 //Country Routes
 const CountryRoutes = require("./routes/Country/countryRoutes");
 
+//Blog 
+const blogRoutes = require("./routes/Blog/blogRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -37,7 +40,12 @@ app.use("/api/category", categoryRoutes);
 app.use('/api/instructor', instructorRoutes);
 app.use('/api/testimonial', testimonialRoutes);
 
+
+
 // Country
 app.use('/api/country',CountryRoutes);
+
+//Blog
+app.use("/api/blog", blogRoutes);
 
 module.exports = app;

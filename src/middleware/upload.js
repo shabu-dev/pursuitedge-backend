@@ -14,8 +14,8 @@ const upload = (folder) => {
             cb(null, uploadDirectory);
         },
         filename: (req, file, cb) => {
-            const extension = path.extname(file.originalname).toLowerCase();
-            const filename = `${folder}-${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+            //const extension = path.extname(file.originalname).toLowerCase();
+            //const filename = `${folder}-${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
             cb(null, filename);
         },
     });

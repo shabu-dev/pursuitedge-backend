@@ -35,8 +35,13 @@ sequelize.sync()
     //Country Models
     db.Country = require('./Country/countryModel')(sequelize,Sequelize);
 
+    //Blog Models
+    db.Blog = require('./Blog/blogModel')(sequelize,Sequelize);
+
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});
+
+   
     
     module.exports = db;
