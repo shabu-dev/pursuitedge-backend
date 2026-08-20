@@ -44,6 +44,9 @@ sequelize.sync()
     db.SupportTicketAttachment = require('./Support/ticketAttachmentModel')(sequelize,Sequelize);
     db.SupportTicketHistory = require('./Support/ticketHistoryModel')(sequelize,Sequelize);
 
+    // Contact Model
+    db.Contact = require('./Contact/contactModel')(sequelize, Sequelize);
+    
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});

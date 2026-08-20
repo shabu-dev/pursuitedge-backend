@@ -25,6 +25,9 @@ const blogRoutes = require("./routes/Blog/blogRoutes");
 //Support
 const supportRoutes =require('./routes/Support/supportRoutes');
 
+//Contact
+const contactRoutes = require('./routes/Contact/contactRoutes');
+
 const app = express();
 
 app.use(cors());
@@ -53,5 +56,8 @@ app.use("/api/blog", blogRoutes);
 
 //Support
 app.use('/api/support',supportRoutes);
+
+//Contact
+app.use('/api/contact',contactRoutes);
 
 module.exports = app;
