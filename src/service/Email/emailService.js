@@ -43,7 +43,7 @@ const sendContactEnquiryEmail = async (data) => {
 
     const { firstname, email, phonenumber, enquiry, company, message } = data;
     const mailOptions = {
-        from: `"PursuitEdge Website" <${process.env.SMTP_USER}>`,
+        from: `"Pursuit Edge Website" <${process.env.SMTP_USER}>`,
         to: process.env.CONTACT_RECEIVER,
         replyTo: email,
         subject: `New Website Enquiry - ${enquiry || 'General Enquiry'}`,
@@ -64,7 +64,7 @@ const sendContactEnquiryEmail = async (data) => {
                                     <tr>
                                         <td style="background:#062f33; padding:30px; text-align:center;">
 
-                                            <div style=" color:#ffffff; font-size:28px; font-weight:bold; letter-spacing:1px;"> PursuitEdge </div>
+                                            <div style=" color:#ffffff; font-size:28px; font-weight:bold; letter-spacing:1px;"> Pursuit Edge </div>
                                             <div style="color:#c8d6d8;font-size:14px;margin-top:8px;"> New Website Enquiry</div>
                                         </td>
                                     </tr>
@@ -74,7 +74,7 @@ const sendContactEnquiryEmail = async (data) => {
                                     <tr>
                                         <td style="padding:35px;">
                                             <h2 style=" margin:0 0 10px; color:#172b2d; font-size:24px; "> New Contact Enquiry </h2>
-                                            <p style=" color:#667; font-size:14px; line-height:1.6; "> A new enquiry has been submitted through the PursuitEdge website. </p>
+                                            <p style=" color:#667; font-size:14px; line-height:1.6; "> A new enquiry has been submitted through the Pursuit Edge website. </p>
 
                                             <!-- CONTACT DETAILS -->
                                             <table width="100%" cellpadding="0" cellspacing="0" style=" margin-top:25px; background:#f7fafb; border-radius:10px; border:1px solid #e6eeee; " >
@@ -122,7 +122,7 @@ const sendContactEnquiryEmail = async (data) => {
 
                                     <tr>
                                         <td style="background:#062f33; padding:22px; text-align:center;">
-                                            <div style="color:#ffffff;font-size:14px;font-weight:bold;">PursuitEdge</div>
+                                            <div style="color:#ffffff;font-size:14px;font-weight:bold;">Pursuit Edge</div>
                                             <div style="color:#aebfc1;font-size:12px;margin-top:7px;">Website Contact Enquiry</div>
                                         </td>
                                     </tr>
@@ -141,9 +141,9 @@ const sendContactEnquiryEmail = async (data) => {
 
 const sendCustomerConfirmationEmail = async ({ firstname, email, enquiry}) => {
     const mailOptions = {
-        from:`"PursuitEdge" <${process.env.SMTP_USER}>`,
+        from:`"Pursuit Edge" <${process.env.SMTP_USER}>`,
         to:email,
-        subject: 'Thank You for Contacting PursuitEdge',
+        subject: 'Thank You for Contacting Pursuit Edge',
         html: `
             <!DOCTYPE html>
             <html>
@@ -160,7 +160,7 @@ const sendCustomerConfirmationEmail = async ({ firstname, email, enquiry}) => {
                                 <table width="600" cellpadding="0" cellspacing="0" style=" max-width:600px; width:100%; background:#ffffff; border-radius:14px; overflow:hidden;">
                                     <tr>
                                         <td style="background:#062f33; padding:30px; text-align:center;">
-                                            <div style="color:#ffffff; font-size:27px; font-weight:bold;"> PursuitEdge </div>
+                                            <div style="color:#ffffff; font-size:27px; font-weight:bold;"> Pursuit Edge </div>
                                         </td>
                                     </tr>
 
@@ -168,10 +168,10 @@ const sendCustomerConfirmationEmail = async ({ firstname, email, enquiry}) => {
                                     <tr>
                                         <td style="padding:40px 35px;">
                                             <h2 style=" color:#172b2d; margin-top:0;"> Thank You, ${escapeHtml(firstname)} </h2>
-                                            <p style="color:#555; font-size:15px; line-height:1.7;"> Thank you for contacting <strong>PursuitEdge</strong>. We have successfully received your enquiry.</p>
+                                            <p style="color:#555; font-size:15px; line-height:1.7;"> Thank you for contacting <strong>Pursuit Edge</strong>. We have successfully received your enquiry.</p>
                                             <div style="background:#f7fafb; border-left:4px solid #f57c20; padding:18px; margin:25px 0; color:#555; line-height:1.6;"> <strong>Enquiry:</strong> ${escapeHtml(enquiry || 'General Enquiry' )} </div>
                                             <p style="color:#555;font-size:14px;line-height:1.7;"> Our team will review your enquiry and get back to you as soon as possible.</p>
-                                            <p style=" color:#555; font-size:14px; "> Best regards,<br> <strong>PursuitEdge Team</strong> </p>
+                                            <p style=" color:#555; font-size:14px; "> Best regards,<br> <strong>Pursuit Edge Team</strong> </p>
                                         </td>
                                     </tr>
 
