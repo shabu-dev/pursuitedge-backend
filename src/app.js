@@ -22,6 +22,9 @@ const CountryRoutes = require("./routes/Country/countryRoutes");
 //Blog 
 const blogRoutes = require("./routes/Blog/blogRoutes");
 
+//Support
+const supportRoutes =require('./routes/Support/supportRoutes');
+
 const app = express();
 
 app.use(cors());
@@ -47,5 +50,8 @@ app.use('/api/country',CountryRoutes);
 
 //Blog
 app.use("/api/blog", blogRoutes);
+
+//Support
+app.use('/api/support',supportRoutes);
 
 module.exports = app;

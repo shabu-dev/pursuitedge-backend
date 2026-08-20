@@ -38,10 +38,25 @@ sequelize.sync()
     //Blog Models
     db.Blog = require('./Blog/blogModel')(sequelize,Sequelize);
 
+    //Support Models
+    db.SupportTicket = require('./Support/ticketModel')(sequelize,Sequelize);
+    db.SupportTicketMessage = require('./Support/ticketMessageModel')(sequelize,Sequelize);
+    db.SupportTicketAttachment = require('./Support/ticketAttachmentModel')(sequelize,Sequelize);
+    db.SupportTicketHistory = require('./Support/ticketHistoryModel')(sequelize,Sequelize);
+
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});
 
-   
+    // ===============================
+    // Support Ticket Associations
+    // ===============================
     
+    db.SupportTicket.hasMany(db.SupportTicketMessage,{foreignKey: 'ticket_id', as: 'messages', onDelete: 'CASCADE',onUpdate: 'CASCADE'});
+    db.SupportTicketMessage.belongsTo(db.SupportTicket,{    foreignKey: 'ticket_id',    as: 'ticket'});
+    db.SupportTicketMessage.hasMany(db.SupportTicketAttachment,{foreignKey: 'message_id', as: 'attachments',onDelete: 'CASCADE',onUpdate: 'CASCADE'});
+    db.SupportTicketAttachment.belongsTo(db.SupportTicketMessage,{foreignKey: 'message_id',    as: 'message'});
+    db.SupportTicket.hasMany(db.SupportTicketHistory,{foreignKey: 'ticket_id',as: 'history', onDelete: 'CASCADE',onUpdate: 'CASCADE'});
+    db.SupportTicketHistory.belongsTo(db.SupportTicket,{foreignKey: 'ticket_id',as: 'ticket'});
+
     module.exports = db;
