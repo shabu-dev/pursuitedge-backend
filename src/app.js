@@ -11,10 +11,10 @@ const loginRoutes = require("./routes/login/loginRoutes");
 const scheduleRoutes = require("./routes/Schedule/scheduleRoutes");
 
 //Course Routes
-const courseRoutes = require("./routes/course/courseRoutes");
-const categoryRoutes = require("./routes/course/categoryRoutes");
+const courseRoutes = require("./routes/Course/courseRoutes");
+const categoryRoutes = require("./routes/Course/categoryRoutes");
 const instructorRoutes = require('./routes/Course/instructorRoutes');
-const testimonialRoutes = require('./routes/course/testimonialRoutes');
+const testimonialRoutes = require('./routes/Course/testimonialRoutes');
 
 //Country Routes
 const CountryRoutes = require("./routes/Country/countryRoutes");
