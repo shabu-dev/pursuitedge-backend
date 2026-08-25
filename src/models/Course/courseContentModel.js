@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
             },
 
             course_id: {
-                type: Sequelize.STRING,
+                type: Sequelize.UUID,
                 allowNull: false,
                 unique: true,
             },
