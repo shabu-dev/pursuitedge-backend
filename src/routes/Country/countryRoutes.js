@@ -5,7 +5,7 @@ const auth = require('../../middleware/auth');
 
 
 router.post('/create', auth, countryController.createCountry);
-router.get('/get', auth, countryController.getCountry);
+router.get('/get', countryController.getCountry);
 router.put('/update/:id', auth, countryController.updateCountry);
 router.delete('/delete/:id', auth, countryController.deleteCountry);
 
