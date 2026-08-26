@@ -24,7 +24,7 @@ const update = async (id, data) => {
         throw new Error('Testimonial not found');
     }
 
-    await Testimonial.update(data);
+    await Testimonial.update(data,{where: { id },});
 
     return testimonial;
 };
@@ -36,7 +36,7 @@ const deleteTestimonial = async (id) => {
         throw new Error('Testimonial not found');
     }
 
-    await Testimonial.destroy();
+    await Testimonial.destroy({where: { id },});
 
     return testimonial;
 };

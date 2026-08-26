@@ -80,12 +80,12 @@ const update = async(req,res) => {
         const existingTestimonial = await testimonialRepository.getById(id);
         if(!existingTestimonial)
         {
-            res.status(404).json({sucess:false, message : "Testimonial not found"});
+           return  res.status(404).json({sucess:false, message : "Testimonial not found"});
         }
         const {name,role,company,content,rating,course} = req.body;
         if(!name || !role || !content || !rating)
         {
-            res.status(400).json({"sucess": false, "message" : "Name, Role, Content and Rating are required!"});
+          return  res.status(400).json({"sucess": false, "message" : "Name, Role, Content and Rating are required!"});
         }
         const updateData = {name, role, company, content, rating, course,};
         if (req.file) {
@@ -112,7 +112,7 @@ const deleteTestimonial = async(req,res) => {
         const existingTestimonial = await testimonialRepository.getById(id);
         if(!existingTestimonial)
         {
-            res.status(404).json({sucess:false, message : "Testimonial not found"});
+           return   res.status(404).json({sucess:false, message : "Testimonial not found"});
         }
         await testimonialRepository.deleteTestimonial(id);
         
