@@ -5,8 +5,8 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 router.post('/create', auth, upload('instructors').single('image'), instructorController.createInstructor);
-router.get('/get', auth, instructorController.getInstructors);
-router.get('/get/:id', auth, instructorController.getInstructorById);
+router.get('/get', instructorController.getInstructors);
+router.get('/get/:id',  instructorController.getInstructorById);
 router.put('/update/:id', auth, upload('instructors').single('image'), instructorController.updateInstructor);
 router.delete('/delete/:id', auth, instructorController.deleteInstructor);
 
