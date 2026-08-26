@@ -5,8 +5,8 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 
 router.post('/create', auth, upload('testimonials').single('image'), testimonialController.create);
-router.get('/get',  testimonialController.get);
-router.get('/get/:id',  testimonialController.getById);
+router.get('/get', auth, testimonialController.get);
+router.get('/get/:id', auth, testimonialController.getById);
 router.put('/update/:id', auth, upload('testimonials').single('image'), testimonialController.update);
 router.delete('/delete/:id', auth, testimonialController.deleteTestimonial);
 router.post('/getByCountryAndCourse', auth, testimonialController.getByCountryAndCourse);
