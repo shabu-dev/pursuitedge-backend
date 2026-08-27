@@ -154,11 +154,27 @@ const getCourseBySlug = async (slug) => {
     }
 };
 
+const updateCourseHeroImage = async (name, heroImage) => { 
+    const [updated] = await Course.update({ hero_image: heroImage }, { where: { name } }); 
+    return updated ? await Course.findOne({ where: { name } }) : null; 
+};
+
+const searchCourses = async (search) => {
+    return await Course.findAll({ attributes: ['id', 'name', 'slug', 'category', 'hero_image'], where: { [db.Sequelize.Op.or]: [{ name: { [db.Sequelize.Op.like]: `%${search}%` } }, { category: { [db.Sequelize.Op.like]: `%${search}%` } }, { slug: { [db.Sequelize.Op.like]: `%${search}%` } }] }, order: [['name', 'ASC']], limit: 8 });
+};
+
+const getPopularCourses = async () => {
+    return await Course.findAll({ attributes: ['id', 'slug', 'name', 'category', 'overview', 'title', 'hero_image', 'badge_text'], order: [['id', 'ASC']] });
+};
+
 module.exports = {
     createCourse,
     getCourses,
     getCourseById,
     updateCourse,
     deleteCourse,
-    getCourseBySlug
+    getCourseBySlug,
+    updateCourseHeroImage,
+    searchCourses,
+    getPopularCourses
 };

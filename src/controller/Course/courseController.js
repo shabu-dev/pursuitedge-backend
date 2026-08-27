@@ -111,11 +111,57 @@ const getCourseBySlug = async (req, res) => {
     }
 };
 
+const updateCourseHeroImage = async (req, res) => {
+    try {
+        const { course } = req.body;
+        if (!course) return res.status(400).json({ success: false, message: 'Course is required' });
+        if (!req.file) return res.status(400).json({ success: false, message: 'Image is required' });
+
+        const baseUrl = `${req.protocol}://${req.get('host')}`;
+        const heroImage = `${baseUrl}/uploads/course/${req.file.filename}`;
+
+        const updatedCourse = await courseRepository.updateCourseHeroImage(course.trim(), heroImage);
+
+        if (!updatedCourse) return res.status(404).json({ success: false, message: 'Course not found' });
+
+        return res.status(200).json({ success: true, message: 'Course hero image updated successfully', course: updatedCourse });
+    } catch (error) {
+        console.error('Update course hero image error:', error);
+        return res.status(500).json({ success: false, message: 'Unable to update course hero image' });
+    }
+};
+
+const searchCourses = async (req, res) => {
+    try {
+        const { search } = req.query;
+        if (!search || !search.trim()) return res.status(400).json({ success: false, message: 'Search keyword is required' });
+        const courses = await courseRepository.searchCourses(search.trim());
+        return res.status(200).json({ success: true, courses });
+    } catch (error) {
+        console.error('Search courses error:', error);
+        return res.status(500).json({ success: false, message: 'Unable to search courses' });
+    }
+};
+
+const getPopularCourses = async (req, res) => {
+    try {
+        const courses = await courseRepository.getPopularCourses();
+        return res.status(200).json({ success: true, message: 'Popular courses fetched successfully', courses });
+    } catch (error) {
+        console.error('Get popular courses error:', error);
+        return res.status(500).json({ success: false, message: 'Unable to fetch popular courses' });
+    }
+};
+
+
 module.exports = {
     createCourse,
     getCourses,
     getCourseById,
     updateCourse,
     deleteCourse,
-    getCourseBySlug
+    getCourseBySlug,
+    updateCourseHeroImage,
+    searchCourses,
+    getPopularCourses
 };       
