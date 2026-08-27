@@ -47,6 +47,9 @@ sequelize.sync()
     // Contact Model
     db.Contact = require('./Contact/contactModel')(sequelize, Sequelize);
     
+    // corporate Model
+    db.Corporate = require('./Corporate/CorporateEnquiry')(sequelize, Sequelize.DataTypes);
+    
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});

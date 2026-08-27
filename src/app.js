@@ -28,6 +28,10 @@ const supportRoutes =require('./routes/Support/supportRoutes');
 //Contact
 const contactRoutes = require('./routes/Contact/contactRoutes');
 
+//Corporate
+const corporateRoutes = require('./routes/Corporate/corporateRoutes');
+
+
 const app = express();
 
 app.use(cors());
@@ -59,5 +63,8 @@ app.use('/api/support',supportRoutes);
 
 //Contact
 app.use('/api/contact',contactRoutes);
+
+//Corporate
+app.use('/api/corporate', corporateRoutes);
 
 module.exports = app;
