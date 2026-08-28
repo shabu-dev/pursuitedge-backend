@@ -154,9 +154,9 @@ const getCourseBySlug = async (slug) => {
     }
 };
 
-const updateCourseHeroImage = async (name, heroImage) => { 
-    const [updated] = await Course.update({ hero_image: heroImage }, { where: { name } }); 
-    return updated ? await Course.findOne({ where: { name } }) : null; 
+const updateCourseHeroImage = async (id, heroImage) => { 
+    const [updated] = await Course.update({ hero_image: heroImage }, { where: { id } }); 
+    return updated ? await Course.findOne({ where: { id } }) : null; 
 };
 
 const searchCourses = async (search) => {
