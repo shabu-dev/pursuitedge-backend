@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.DATE,
         allowNull: false
     },
+    weekend_dates: {
+      type: Sequelize.JSON,
+      allowNull: true,
+    },
     batch_type: {
         type: Sequelize.STRING, 
         allowNull: false
