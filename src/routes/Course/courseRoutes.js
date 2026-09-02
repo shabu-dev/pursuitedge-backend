@@ -14,4 +14,6 @@ router.put("/hero-image", upload('course').single('image'), courseController.upd
 router.get('/search', courseController.searchCourses);
 router.get('/popular', courseController.getPopularCourses);
 
+router.get('/get/category-wise/:slug', courseController.getCategoryWiseCourses);
+
 module.exports = router;

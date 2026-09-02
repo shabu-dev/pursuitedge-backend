@@ -143,6 +143,10 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: true,
                 defaultValue: [],
             },
+            order : {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            }
         },
         {
             tableName: 'courses',

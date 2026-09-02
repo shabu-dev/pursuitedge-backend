@@ -49,13 +49,15 @@ const createCourse = async (courseData) => {
 const getCourses = async () => {
     try {
         const courses = await Course.findAll({
+            where: { status: 'Active',},
             include: [
                 {
                     model: CourseContent,
                     as: 'content',
                 },
             ],
-            order: [['createdAt', 'DESC']],
+           
+            order: [['order', 'ASC']],
         });
         return courses;
     } catch (error) {
@@ -160,12 +162,29 @@ const updateCourseHeroImage = async (id, heroImage) => {
 };
 
 const searchCourses = async (search) => {
-    return await Course.findAll({ attributes: ['id', 'name', 'slug', 'category', 'hero_image'], where: { [db.Sequelize.Op.or]: [{ name: { [db.Sequelize.Op.like]: `%${search}%` } }, { category: { [db.Sequelize.Op.like]: `%${search}%` } }, { slug: { [db.Sequelize.Op.like]: `%${search}%` } }] }, order: [['name', 'ASC']], limit: 8 });
+    return await Course.findAll({ attributes: ['id', 'name', 'slug', 'category', 'hero_image'], where: { status: 'Active', [db.Sequelize.Op.or]: [{ name: { [db.Sequelize.Op.like]: `%${search}%` } }, { category: { [db.Sequelize.Op.like]: `%${search}%` } }, { slug: { [db.Sequelize.Op.like]: `%${search}%` } }] },  order: [['name', 'ASC']], limit: 8 });
 };
 
 const getPopularCourses = async () => {
-    return await Course.findAll({ attributes: ['id', 'slug', 'name', 'category', 'overview', 'title', 'hero_image', 'badge_text'], order: [['id', 'ASC']] });
+    return await Course.findAll({ attributes: ['id', 'slug', 'name', 'category', 'overview', 'title', 'hero_image', 'badge_text'],  where: { status: 'Active'},order: [['id', 'ASC']] });
 };
+
+const getCategoryWiseCourses = async (slug) => {
+    const category = await db.Category.findOne({
+        where: { slug: slug }
+    });
+    if (!category) {
+        return [];
+    }
+    const courses = await db.Course.findAll({ 
+        attributes: ['id', 'title', 'name', 'slug', 'category', 'hero_image', 'hero_subtitle', 'duration','badge_text','level'],
+        where: { category: category.name },
+        //order: [["order", "ASC"]]
+    })
+
+    return courses;
+
+}
 
 module.exports = {
     createCourse,
@@ -176,5 +195,6 @@ module.exports = {
     getCourseBySlug,
     updateCourseHeroImage,
     searchCourses,
-    getPopularCourses
+    getPopularCourses,
+    getCategoryWiseCourses
 };

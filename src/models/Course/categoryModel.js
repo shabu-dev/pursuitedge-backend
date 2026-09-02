@@ -27,6 +27,10 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: true,
                 defaultValue: 'active',
             },
+             order : {
+                type: Sequelize.INTEGER,
+                allowNull: true,
+            }
         },
         {
             tableName: 'categories',

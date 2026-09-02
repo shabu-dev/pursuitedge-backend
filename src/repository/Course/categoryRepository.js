@@ -15,7 +15,8 @@ const createCategory = async (categoryData) => {
 const getCategories = async () => {
     try {
         return await Category.findAll({
-            order: [['createdAt', 'DESC']],
+            where: { status: 'Active'},
+            order: [['order', 'ASC']],
         });
     } catch (error) {
         console.error('Error fetching categories:', error);
