@@ -166,7 +166,7 @@ const searchCourses = async (search) => {
 };
 
 const getPopularCourses = async () => {
-    return await Course.findAll({ attributes: ['id', 'slug', 'name', 'category', 'overview', 'title', 'hero_image', 'badge_text'],  where: { status: 'Active'},order: [['id', 'ASC']] });
+    return await Course.findAll({ attributes: ['id', 'slug', 'name', 'category', 'overview', 'title', 'hero_image', 'badge_text'],  where: { status: 'Active'},order: [['order', 'ASC']] });
 };
 
 const getCategoryWiseCourses = async (slug) => {
