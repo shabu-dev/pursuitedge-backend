@@ -170,6 +170,19 @@ const getCategoryWiseCourses = async (req,res) => {
     }
 }
 
+const getCategoryWiseCount =async(req,res) => {
+    try 
+    {
+        const categories = await courseRepository.getCategoryWiseCount();
+        return res.status(200).json({ success: true, message: 'Category wise course count fetched successfully', categories});
+    }
+    catch (error) {
+        console.error( 'Get category wise count error:', error);
+        return res.status(500).json({ success: false, message: 'Unable to fetch category wise course count'
+        });
+    }
+}
+
 
 
 module.exports = {
@@ -182,5 +195,6 @@ module.exports = {
     updateCourseHeroImage,
     searchCourses,
     getPopularCourses,
-    getCategoryWiseCourses
+    getCategoryWiseCourses,
+    getCategoryWiseCount
 };       

@@ -178,13 +178,39 @@ const getCategoryWiseCourses = async (slug) => {
     }
     const courses = await db.Course.findAll({ 
         attributes: ['id', 'title', 'name', 'slug', 'category', 'hero_image', 'hero_subtitle', 'duration','badge_text','level'],
-        where: { category: category.name },
-        //order: [["order", "ASC"]]
+        where: { category: category.name,status: 'Active' },
+        order: [["order", "ASC"]]
     })
 
     return courses;
 
 }
+
+const getCategoryWiseCount = async () => {
+    try {
+        const categories = await db.Category.findAll({
+            attributes: [ 'name', 'slug', 'description', 'status'],
+            where: { status: 'Active' },
+            order: [['order', 'ASC']],
+            raw: true
+        });
+
+        const categoryWiseCount = await Promise.all(
+            categories.map(async (category) => {
+                const course_count = await Course.count({
+                    where: { category: category.name, status: 'Active'}
+                });
+                return { name: category.name, course_count, slug: category.slug, description: category.description, status: category.status};
+            })
+        );
+        return categoryWiseCount;
+
+    } catch (error) {
+        console.error( 'Error fetching category wise course count:', error);
+        throw error;
+    }
+};
+
 
 module.exports = {
     createCourse,
@@ -196,5 +222,6 @@ module.exports = {
     updateCourseHeroImage,
     searchCourses,
     getPopularCourses,
-    getCategoryWiseCourses
+    getCategoryWiseCourses,
+    getCategoryWiseCount
 };

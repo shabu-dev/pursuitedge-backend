@@ -16,4 +16,6 @@ router.get('/popular', courseController.getPopularCourses);
 
 router.get('/get/category-wise/:slug', courseController.getCategoryWiseCourses);
 
+router.get('/get/count/category-wise-count',courseController.getCategoryWiseCount);
+
 module.exports = router;
