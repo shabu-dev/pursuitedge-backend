@@ -49,6 +49,9 @@ sequelize.sync()
     
     // corporate Model
     db.Corporate = require('./Corporate/CorporateEnquiry')(sequelize, Sequelize.DataTypes);
+
+    // Student Login Model
+    db.StudentLogin = require('./Login/studentLoginModel')(sequelize, Sequelize);
     
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
