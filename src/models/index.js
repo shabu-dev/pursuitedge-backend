@@ -52,10 +52,15 @@ sequelize.sync()
 
     // Student Login Model
     db.StudentLogin = require('./Login/studentLoginModel')(sequelize, Sequelize);
+
+    // Payment Model
+    db.Payment = require('./Payment/paymentModel')(sequelize, Sequelize);
     
     // Associations
     db.Course.hasOne(db.CourseContent, {foreignKey: 'course_id',as: 'content',onDelete: 'CASCADE',onUpdate: 'CASCADE',});
     db.CourseContent.belongsTo(db.Course, {foreignKey: 'course_id',as: 'course',});
+
+    
 
     // ===============================
     // Support Ticket Associations
